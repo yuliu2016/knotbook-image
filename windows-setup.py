@@ -86,3 +86,6 @@ subprocess.run(jpackage_cmd)
 # os.remove(f'KnotBook/KnotBook.ico')
 
 print("Done")
+
+
+subprocess.run(["ls", "-R"])
