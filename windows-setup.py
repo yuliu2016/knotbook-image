@@ -55,8 +55,8 @@ if os.path.isdir("app"):
 jpackage_cmd = [
     "jpackage/jdk-14/bin/jpackage.exe",
     "--verbose",
-    "--input",
-    "inputs",
+    # "--input",
+    # "inputs",
     "--package-type",
     "app-image",
     "--app-version",
@@ -87,5 +87,5 @@ subprocess.run(jpackage_cmd)
 
 print("Done")
 
-
+os.chdir("../")
 subprocess.run(["ls", "-R"])
