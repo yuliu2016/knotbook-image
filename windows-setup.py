@@ -1,6 +1,6 @@
 from shared import *
 
-JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-35_windows-x64_bin.zip"
+JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_windows-x64_bin.zip"
 JDK_11_LTS = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4%2B11/OpenJDK11U-jdk_x64_windows_hotspot_11.0.4_11.zip"
 JFX_13 = "http://gluonhq.com/download/javafx-13-sdk-windows/"
 
