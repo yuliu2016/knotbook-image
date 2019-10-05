@@ -26,27 +26,27 @@ modules = [
     "jdk.jfr"
 ]
 
-# if os.path.isdir("image"):
-#     print("Removing cached image")
-#     shutil.rmtree("image")
+if os.path.isdir("image"):
+    print("Removing cached image")
+    shutil.rmtree("image")
 
-# jlink_cmd = [
-#         "jdk/jdk-11.0.4+11/bin/jlink.exe",
-#         "--compress=1",
-#         "--no-header-files",
-#         "--no-man-pages",
-#         "--dedup-legal-notices=error-if-not-same-content",
-#         "--strip-debug",
-#         "--module-path", 
-#         "javafx/javafx-sdk-13/lib/",
-#         "--add-modules",
-#         ",".join(modules),
-#         "--output",
-#         "image"
-#         ]
+jlink_cmd = [
+        "jdk/jdk-11.0.4+11/bin/jlink.exe",
+        "--compress=1",
+        "--no-header-files",
+        "--no-man-pages",
+        "--dedup-legal-notices=error-if-not-same-content",
+        "--strip-debug",
+        "--module-path", 
+        "javafx/javafx-sdk-13/lib/",
+        "--add-modules",
+        ",".join(modules),
+        "--output",
+        "image"
+        ]
 
-# print("Generating Runtime")
-# subprocess.run(jlink_cmd)
+print("Generating Runtime")
+subprocess.run(jlink_cmd)
 
 if os.path.isdir("app"):
     print("Removing cached app")
@@ -57,8 +57,8 @@ jpackage_cmd = [
     "--verbose",
     "--input",
     "inputs",
-    "--output",
-    "app",
+    "--package-type",
+    "app-image",
     "--app-version",
     "3.0.0",
     "--name",
@@ -79,10 +79,10 @@ subprocess.run(jpackage_cmd)
 
 # print("Removing extra DLL files")
 
-# for p in os.listdir("app/KnotBook/"):
-#     if p.endswith("dll") and not p.startswith("applauncher"):
-#         os.remove(f"app/KnotBook/{p}")
+for p in os.listdir("KnotBook/"):
+    if p.endswith("dll") and not p.startswith("applauncher"):
+        os.remove(f"KnotBook/{p}")
 
-# os.remove(f'app/KnotBook/KnotBook.ico')
+os.remove(f'KnotBook/KnotBook.ico')
 
 print("Done")

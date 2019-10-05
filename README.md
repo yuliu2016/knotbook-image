@@ -1,4 +1,4 @@
-# knotbook-image Image
+# KnotBook Image
 
 |Platform|Build Status|
 |----|----|
