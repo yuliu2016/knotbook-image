@@ -20,10 +20,12 @@ unzip("javafx.zip", "javafx")
 modules = [
     "jdk.unsupported",
     "jdk.httpserver",
+    "jdk.jfr",
     "javafx.base",
     "javafx.graphics",
     "javafx.controls",
-    "jdk.jfr"
+    "javafx.fxml",
+    "javafx.swing"
 ]
 
 if os.path.isdir("image"):
@@ -55,8 +57,6 @@ if os.path.isdir("app"):
 jpackage_cmd = [
     "jpackage/jdk-14/bin/jpackage.exe",
     "--verbose",
-    # "--input",
-    # "inputs",
     "--package-type",
     "app-image",
     "--app-version",
@@ -77,15 +77,13 @@ jpackage_cmd = [
 print("Generating Application")
 subprocess.run(jpackage_cmd)
 
-# print("Removing extra DLL files")
+# print("Removing extra files")
 
-# for p in os.listdir("KnotBook/"):
-#     if p.endswith("dll") and not p.startswith("applauncher"):
-#         os.remove(f"KnotBook/{p}")
+for p in os.listdir("KnotBook/"):
+    if p.endswith("dll") and not p.startswith("applauncher"):
+        os.remove(f"KnotBook/{p}")
 
-# os.remove(f'KnotBook/KnotBook.ico')
+os.remove("KnotBook/KnotBook.ico")
+os.remove("KnotBook/.jpackage.xml")
 
 print("Done")
-
-os.chdir("../")
-subprocess.run(["ls", "-R"])
