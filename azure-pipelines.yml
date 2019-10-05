@@ -5,7 +5,7 @@ jobs:
     steps:
       - task: PythonScript@0
         inputs:
-          scriptPath: "windows.py"
+          scriptPath: "windows-setup.py"
       - task: ArchiveFiles@2
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
         inputs:
@@ -19,43 +19,43 @@ jobs:
         inputs:
           path: "$(System.DefaultWorkingDirectory)/windows-$(Build.BuildNumber).tar.xz"
           artifact: "windows-image"
-  - job: Linux
-    pool:
-      vmImage: "ubuntu-latest"
-    steps:
-      - task: PythonScript@0
-        inputs:
-          scriptPath: "linux.py"
-      - task: ArchiveFiles@2
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/build/kb.application/image"
-          includeRootFolder: true
-          archiveType: "tar"
-          tarCompression: "xz"
-          archiveFile: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
-      - task: PublishPipelineArtifact@1
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          path: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
-          artifact: "ubuntu-image"
-  - job: MacOS
-    pool:
-      vmImage: "macOS-latest"
-    steps:
-      - task: PythonScript@0
-        inputs:
-          scriptPath: "macOS.py"
-      - task: ArchiveFiles@2
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/build/kb.application/image"
-          includeRootFolder: true
-          archiveType: "tar"
-          tarCompression: "xz"
-          archiveFile: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
-      - task: PublishPipelineArtifact@1
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          path: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
-          artifact: "macOS-image"
+  # - job: Linux
+  #   pool:
+  #     vmImage: "ubuntu-latest"
+  #   steps:
+  #     - task: PythonScript@0
+  #       inputs:
+  #         scriptPath: "linux-setup.py"
+  #     - task: ArchiveFiles@2
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         rootFolderOrFile: "$(System.DefaultWorkingDirectory)/build/kb.application/image"
+  #         includeRootFolder: true
+  #         archiveType: "tar"
+  #         tarCompression: "xz"
+  #         archiveFile: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
+  #     - task: PublishPipelineArtifact@1
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         path: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
+  #         artifact: "ubuntu-image"
+  # - job: MacOS
+  #   pool:
+  #     vmImage: "macOS-latest"
+  #   steps:
+  #     - task: PythonScript@0
+  #       inputs:
+  #         scriptPath: "macOS-setup.py"
+  #     - task: ArchiveFiles@2
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         rootFolderOrFile: "$(System.DefaultWorkingDirectory)/build/kb.application/image"
+  #         includeRootFolder: true
+  #         archiveType: "tar"
+  #         tarCompression: "xz"
+  #         archiveFile: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
+  #     - task: PublishPipelineArtifact@1
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         path: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
+  #         artifact: "macOS-image"
