@@ -79,10 +79,10 @@ subprocess.run(jpackage_cmd)
 
 # print("Removing extra DLL files")
 
-for p in os.listdir("KnotBook/"):
-    if p.endswith("dll") and not p.startswith("applauncher"):
-        os.remove(f"KnotBook/{p}")
+# for p in os.listdir("KnotBook/"):
+#     if p.endswith("dll") and not p.startswith("applauncher"):
+#         os.remove(f"KnotBook/{p}")
 
-os.remove(f'KnotBook/KnotBook.ico')
+# os.remove(f'KnotBook/KnotBook.ico')
 
 print("Done")
