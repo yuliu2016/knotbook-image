@@ -13,6 +13,7 @@ import argparse
 import shutil
 import ntpath
 import subprocess
+import stat
 
 def path_leaf(path):
     head, tail = ntpath.split(path)
@@ -55,3 +56,8 @@ def unzip(path: str, name: str):
 def make_tarfile(output_filename, source_dir):
     with tarfile.open(output_filename, "w:xz") as tar:
         tar.add(source_dir)
+
+# https://stackoverflow.com/questions/1889597/deleting-directory-in-python
+def remove_readonly(func, path, excinfo):
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
