@@ -1,7 +1,8 @@
 from shared import *
 
 JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_windows-x64_bin.zip"
-JDK_11_LTS = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4%2B11/OpenJDK11U-jdk_x64_windows_hotspot_11.0.4_11.zip"
+# JDK_11_LTS = "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4%2B11/OpenJDK11U-jdk_x64_windows_hotspot_11.0.4_11.zip"
+JDK_13 = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip"
 JFX_13 = "https://gluonhq.com/download/javafx-13-jmods-windows/"
 KT_STDLIB = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.3.50/kotlin-stdlib-1.3.50-modular.jar"
 KT_REFLECT = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.3.50/kotlin-reflect-1.3.50-modular.jar"
@@ -13,7 +14,7 @@ os.chdir("windows-gen")
 download_with_progress(JPACKAGE_URL, "jpackage.zip")
 unzip("jpackage.zip", "jpackage")
 
-download_with_progress(JDK_11_LTS, "jdk.zip")
+download_with_progress(JDK_13, "jdk.zip")
 unzip("jdk.zip", "jdk")
 
 download_with_progress(JFX_13, "javafx.zip")
@@ -45,11 +46,12 @@ if os.path.isdir("image"):
     shutil.rmtree("image")
 
 jlink_cmd = [
-        "jdk/jdk-11.0.4+11/bin/jlink.exe",
+        "jdk/jdk-13.0.1/bin/jlink.exe",
         "--compress=1",
         "--no-header-files",
         "--no-man-pages",
         "--strip-debug",
+        "--strip-native-commands",
         "--module-path", 
         "javafx/javafx-jmods-13/;kotlin/",
         "--add-modules",
@@ -80,7 +82,7 @@ jpackage_cmd = [
     "image",
     "--java-options",
     " ".join([
-        "--module-path app",
+        "--module-path app/libs/",
         # Enable SpreadsheetView
         "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=org.controlsfx.controls",
         "--add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls",

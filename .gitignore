@@ -2,3 +2,4 @@ __pycache__/
 windows-gen/
 mac-gen/
 linux-gen/
+.vscode/
