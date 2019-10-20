@@ -23,7 +23,7 @@ def download_file(url, target, block_size=2 ** 19):
     if os.path.exists(target):
         print(f"File {target} already exists. Skipping download.")
         return
-    print("Downloading {url} into {target}")
+    print(f"Downloading {url} into {target}")
     try:
         u = urlopen(url)
         with open(target, 'wb') as f:
@@ -102,8 +102,8 @@ elif is_mac:
     JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_osx-x64_bin.tar.gz"
     JDK_URL = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_osx-x64_bin.tar.gz"
     JFX_URL = "https://gluonhq.com/download/javafx-13-jmods-mac/"
-    JLINK_EXEC = "jdk/jdk-13.0.1/bin/jlink"
-    JPACKAGE_EXEC = "jpackage/jdk-14/bin/jpackage"
+    JLINK_EXEC = "jdk/jdk-13.0.1.jdk/Contents/Home/bin/jlink"
+    JPACKAGE_EXEC = "jpackage/jdk-14,jdk/Contents/Home/bin/jpackage"
     ICON_PATH = "knot.png"
     download_file(JPACKAGE_URL, "jpackage.tar.gz")
     extract_tar("jpackage.tar.gz", "jpackage")
