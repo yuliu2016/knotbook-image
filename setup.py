@@ -1,14 +1,10 @@
 from urllib.request import urlopen, urlretrieve
 from traceback import print_exc
-import json
 import sys
 import platform
 import tarfile
 import zipfile
 import os
-import time
-import datetime
-import argparse
 import shutil
 import ntpath
 import subprocess
@@ -157,6 +153,8 @@ modules = [
     "javafx.swing",
     "kotlin.stdlib",
     "kotlin.reflect",
+    "org.controlsfx.controls",
+    "rsyntaxtextarea"
 ]
 
 if os.path.isdir("image"):
@@ -171,7 +169,7 @@ jlink_cmd = [
         "--strip-debug",
         "--strip-native-commands",
         "--module-path", 
-        "javafx/javafx-jmods-13/;kotlin/",
+        "javafx/javafx-jmods-13/;kotlin/;../lib/",
         "--add-modules",
         ",".join(modules),
         "--output",
@@ -179,7 +177,9 @@ jlink_cmd = [
         ]
 
 print("Generating Runtime")
-subprocess.run(jlink_cmd)
+ret = subprocess.run(jlink_cmd).returncode
+if ret != 0:
+    sys.exit(ret)
 
 if os.path.isdir("KnotBook"):
     print("Removing cached app")
@@ -216,7 +216,9 @@ jpackage_cmd = [
 ]
 
 print("Generating Application")
-subprocess.run(jpackage_cmd)
+ret = subprocess.run(jpackage_cmd).returncode
+if ret != 0:
+    sys.exit(ret)
 
 if is_windows:
     print("Removing extra files")

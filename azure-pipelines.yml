@@ -22,49 +22,49 @@ jobs:
         inputs:
           path: "$(System.DefaultWorkingDirectory)/windows-$(Build.BuildNumber).tar.xz"
           artifact: "windows-image"
-  - job: Linux
-    pool:
-      vmImage: "ubuntu-latest"
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.7'
-      - task: PythonScript@0
-        inputs:
-          scriptPath: "setup.py"
-      - task: ArchiveFiles@2
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/linux-gen/KnotBook"
-          includeRootFolder: true
-          archiveType: "tar"
-          tarCompression: "xz"
-          archiveFile: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
-      - task: PublishPipelineArtifact@1
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          path: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
-          artifact: "ubuntu-image"
-  - job: macOS
-    pool:
-      vmImage: "macOS-latest"
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.7'
-      - task: PythonScript@0
-        inputs:
-          scriptPath: "setup.py"
-      - task: ArchiveFiles@2
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/mac-gen/Knotbook"
-          includeRootFolder: true
-          archiveType: "tar"
-          tarCompression: "xz"
-          archiveFile: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
-      - task: PublishPipelineArtifact@1
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-        inputs:
-          path: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
-          artifact: "macOS-image"
+  # - job: Linux
+  #   pool:
+  #     vmImage: "ubuntu-latest"
+  #   steps:
+  #     - task: UsePythonVersion@0
+  #       inputs:
+  #         versionSpec: '3.7'
+  #     - task: PythonScript@0
+  #       inputs:
+  #         scriptPath: "setup.py"
+  #     - task: ArchiveFiles@2
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         rootFolderOrFile: "$(System.DefaultWorkingDirectory)/linux-gen/KnotBook"
+  #         includeRootFolder: true
+  #         archiveType: "tar"
+  #         tarCompression: "xz"
+  #         archiveFile: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
+  #     - task: PublishPipelineArtifact@1
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         path: "$(System.DefaultWorkingDirectory)/ubuntu-$(Build.BuildNumber).tar.xz"
+  #         artifact: "ubuntu-image"
+  # - job: macOS
+  #   pool:
+  #     vmImage: "macOS-latest"
+  #   steps:
+  #     - task: UsePythonVersion@0
+  #       inputs:
+  #         versionSpec: '3.7'
+  #     - task: PythonScript@0
+  #       inputs:
+  #         scriptPath: "setup.py"
+  #     - task: ArchiveFiles@2
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         rootFolderOrFile: "$(System.DefaultWorkingDirectory)/mac-gen/Knotbook"
+  #         includeRootFolder: true
+  #         archiveType: "tar"
+  #         tarCompression: "xz"
+  #         archiveFile: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
+  #     - task: PublishPipelineArtifact@1
+  #       condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #       inputs:
+  #         path: "$(System.DefaultWorkingDirectory)/macOS-$(Build.BuildNumber).tar.xz"
+  #         artifact: "macOS-image"
