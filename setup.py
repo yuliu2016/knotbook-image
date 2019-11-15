@@ -77,7 +77,7 @@ if is_windows:
     if not os.path.isdir("windows-gen"):
         os.mkdir("windows-gen")
     os.chdir("windows-gen")
-    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_windows-x64_bin.zip"
+    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-70_windows-x64_bin.zip"
     JDK_URL = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip"
     JFX_URL = "https://gluonhq.com/download/javafx-13-jmods-windows/"
     JLINK_EXEC = "jdk/jdk-13.0.1/bin/jlink.exe"
@@ -95,7 +95,7 @@ elif is_mac:
     if not os.path.isdir("mac-gen"):
         os.mkdir("mac-gen")
     os.chdir("mac-gen")
-    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_osx-x64_bin.tar.gz"
+    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-70_osx-x64_bin.tar.gz"
     JDK_URL = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_osx-x64_bin.tar.gz"
     JFX_URL = "https://gluonhq.com/download/javafx-13-jmods-mac/"
     JLINK_EXEC = "jdk/jdk-13.0.1.jdk/Contents/Home/bin/jlink"
@@ -113,7 +113,7 @@ elif is_linux:
     if not os.path.isdir("linux-gen"):
         os.mkdir("linux-gen")
     os.chdir("linux-gen")
-    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-49_linux-x64_bin.tar.gz"
+    JPACKAGE_URL = "https://download.java.net/java/early_access/jpackage/1/openjdk-14-jpackage+1-70_linux-x64_bin.tar.gz"
     JDK_URL = "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz"
     JFX_URL = "https://gluonhq.com/download/javafx-13-jmods-linux/"
     JLINK_EXEC = "jdk/jdk-13.0.1/bin/jlink"
@@ -134,11 +134,11 @@ else:
 if not os.path.isdir("kotlin"):
     os.mkdir("kotlin")
 
-KT_STDLIB = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.3.50/kotlin-stdlib-1.3.50-modular.jar"
-KT_REFLECT = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.3.50/kotlin-reflect-1.3.50-modular.jar"
+KT_STDLIB = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.3.60/kotlin-stdlib-1.3.60-modular.jar"
+KT_REFLECT = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.3.60/kotlin-reflect-1.3.60-modular.jar"
 
-download_file(KT_STDLIB, "kotlin/kotlin-stdlib-1.3.50-modular.jar")
-download_file(KT_REFLECT, "kotlin/kotlin-reflect-1.3.50-modular.jar")
+download_file(KT_STDLIB, "kotlin/kotlin-stdlib-1.3.60-modular.jar")
+download_file(KT_REFLECT, "kotlin/kotlin-reflect-1.3.60-modular.jar")
 
 modules = [
     "java.logging",
@@ -188,7 +188,7 @@ if os.path.isdir("KnotBook"):
 jpackage_cmd = [
     JPACKAGE_EXEC,
     "--verbose",
-    "--package-type",
+    "--type",
     "app-image",
     "--app-version",
     "3.0.0",
