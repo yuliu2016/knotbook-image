@@ -14,7 +14,6 @@ def path_leaf(path):
     head, tail = ntpath.split(path)
     return tail or ntpath.basename(head)
 
-
 def download_file(url, target, block_size=2 ** 19):
     if os.path.exists(target):
         print(f"File {target} already exists. Skipping download.")
@@ -134,11 +133,13 @@ else:
 if not os.path.isdir("kotlin"):
     os.mkdir("kotlin")
 
-KT_STDLIB = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.3.60/kotlin-stdlib-1.3.60-modular.jar"
-KT_REFLECT = "http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.3.60/kotlin-reflect-1.3.60-modular.jar"
+KT = "1.3.60"
 
-download_file(KT_STDLIB, "kotlin/kotlin-stdlib-1.3.60-modular.jar")
-download_file(KT_REFLECT, "kotlin/kotlin-reflect-1.3.60-modular.jar")
+KT_STDLIB = f"http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/{KT}/kotlin-stdlib-{KT}-modular.jar"
+KT_REFLECT = f"http://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-reflect/{KT}/kotlin-reflect-{KT}-modular.jar"
+
+download_file(KT_STDLIB, f"kotlin/kotlin-stdlib-{KT}-modular.jar")
+download_file(KT_REFLECT, f"kotlin/kotlin-reflect-{KT}-modular.jar")
 
 modules = [
     "java.logging",
@@ -146,6 +147,9 @@ modules = [
     "jdk.unsupported",
     "jdk.httpserver",
     "jdk.jfr",
+    "jdk.crypto.cryptoki",
+    "jdk.crypto.ec",
+    "jdk.crypto.mscapi",
     "javafx.base",
     "javafx.graphics",
     "javafx.controls",
